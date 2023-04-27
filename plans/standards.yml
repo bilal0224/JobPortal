@@ -3,5 +3,7 @@ General:
 
 Frontend:
 
-Backend:
+Backend + Scrappers:
   - Tab Size: 4 spaces for Python files.
+  - String Quote: Double quotes always
+  - File Documentation: Documentation of the file on the
