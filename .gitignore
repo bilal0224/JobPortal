@@ -1,0 +1,5 @@
+# Ignored frontend stuff
+node_modules/
+
+# Ignored backend stuff
+__pycache__

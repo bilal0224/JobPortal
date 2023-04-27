@@ -1,0 +1,7 @@
+General:
+  - Empty endline at the end of every file.
+
+Frontend:
+
+Backend:
+  - Tab Size: 4 spaces for Python files.
