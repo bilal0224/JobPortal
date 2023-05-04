@@ -9,7 +9,7 @@ from pathlib import Path
 class CompanyScanner:
     def __init__(self, company_name, company_url, headers=False):
         self.company_name = company_name
-        self.company_url = company_url
+        self.company_url = company_url[:-1]
         self.headers = headers
 
         self.visited_links = set()
@@ -25,14 +25,14 @@ class CompanyScanner:
         if status.name == 'FAILURE':
             print('PANIC SAVE')
         print('\nExporting data\n')
-        Path(self.company_name).mkdir(parents=True, exist_ok=True)
+        Path(f'scraped_data/{self.company_name}').mkdir(parents=True, exist_ok=True)
 
         print('Exporting forms')
-        with open(self.company_name + '/' + self.company_name + '.html', 'w') as form_file:
+        with open(f'scraped_data/{self.company_name}/{self.company_name}.html', 'w') as form_file:
             [form_file.write(tag.prettify()) for tag in list(self.forms)]
 
         print('Exporting links')
-        with open(self.company_name + '/' + self.company_name + '.json', 'w') as links_file:
+        with open(f'scraped_data/{self.company_name}/{self.company_name}.json', 'w') as links_file:
             json.dump(list(self.visited_links), links_file)
 
         print('\nDone!\n')
@@ -129,8 +129,3 @@ class CompanyScanner:
             print(f'Visited Links Count: {len(self.visited_links)}\n')
 
             status = self.__scan()
-
-
-scanner = CompanyScanner(company_name='CodeNinja',
-                         company_url='https://invozone.com/')
-scanner.run()
