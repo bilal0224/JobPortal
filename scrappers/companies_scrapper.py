@@ -4,15 +4,8 @@ Extract company names and links from themanifest.com
 
 import json
 from bs4 import BeautifulSoup
-from enum import Enum
-from utils import simple_connector
+from utils import simple_connector, Status
 from urllib.parse import urlparse
-
-
-class Status(Enum):
-    FAILURE = 0
-    OK = 1
-    NEXT = 2
 
 
 class CompaniesScrapper:
@@ -35,7 +28,6 @@ class CompaniesScrapper:
                 html = simple_connector(next_page)
                 return (Status.NEXT, html)
             except Exception as e:
-                breakpoint()
                 return (Status.FAILURE, "Error!")
 
     def __next_page(self):
@@ -75,7 +67,8 @@ class CompaniesScrapper:
             json.dump(companies, output_file)
 
     def run(self):
-        """Runner
+        """
+            Runs the scraper
         """
         companies_dict = {}
         status = Status.NEXT
