@@ -3,3 +3,6 @@ node_modules/
 
 # Ignored backend stuff
 __pycache__
+
+# Ignore .html (because of some very long repeated forms)
+*.html
